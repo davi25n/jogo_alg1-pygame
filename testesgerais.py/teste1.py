@@ -21,19 +21,30 @@ def criar_blocos(quantidade_blocos_linha, quantidade_linhas):
     return blocos
 
 cores = {
-    "branco" =(255, 255, 255),
-    "preto" =(0, 0, 0),
-    "amarelo" =(255, 255, 0),
-    "azul" =(0, 0, 255),
-    "verde" =(0, 255, 0)
+    "branco": (255, 255, 255),
+    "preto": (0, 0, 0),
+    "amarelo": (255, 255, 0),
+    "azul": (0, 0, 255),
+    "verde": (0, 255, 0)
 }
 
 fim_jogo = False
 
 pontuacao = 0
 
+movimento_bola = [1, 1]
+
 #criar as funçoes
 
 #desenhar o que aparecerá na tela
+tela.fill(cores["preto"])
 
 #cria um loop infinito
+while not fim_jogo:
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:
+            fim_jogo = True
+    pygame.time.wait(1)
+    pygame.display.flip()
+
+pygame.quit()
