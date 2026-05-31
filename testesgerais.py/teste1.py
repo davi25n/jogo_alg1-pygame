@@ -3,10 +3,12 @@ import pygame
 #inicializar
 pygame.init()
 
+#definir o tamanho da tela e o nome do jogo
 tamanho_tela = (800, 800)
 tela = pygame.display.set_mode(tamanho_tela)
 pygame.display.set_caption("brick breaker")
 
+#definir as constantes dos objetos do jogo 
 tamanho_bola = 15
 bola = pygame.Rect(400, 500, tamanho_bola, tamanho_bola)
 tamanho_jogador = 100
@@ -15,20 +17,23 @@ quantidade_blocos_linha = 8
 quantidade_linhas = 5
 quantidade_total_blocos = quantidade_blocos_linha * quantidade_linhas
 
+#definir a lista que irá conter os blocos do jogo
 def criar_blocos(quantidade_blocos_linha, quantidade_linhas):
+    #definição e estabelecimento dos parametros que criarão os blocos
     altura_tela = tamanho_tela[1]
     largura_tela = tamanho_tela[0]
     distancia_blocos = 5
     largura_bloco = (largura_tela // quantidade_blocos_linha) - distancia_blocos
     altura_bloco = 20
     blocos = []
-    #criar blocos
+    #criação dos blocos que são uma lista de retangulos em forma de matriz
     for j in range(quantidade_linhas):
         for i in range(quantidade_blocos_linha):
             bloco = pygame.Rect(i*(largura_bloco + distancia_blocos), j*(altura_bloco + distancia_blocos*2), largura_bloco, altura_bloco)
             blocos.append(bloco)
     return blocos
 
+#definir as tuplas de cores 
 cores = {
     "branco": (255, 255, 255),
     "preto": (0, 0, 0),
@@ -37,12 +42,10 @@ cores = {
     "verde": (0, 255, 0)
 }
 
-# Variável GLOBAL que controla o loop do jogo
-# Quando fim_jogo = True, o loop while encerra
+#definição de algumas variaveis que mudarão durante o jogo
 fim_jogo = False
 
 pontuacao = 0
-
 
 movimento_bola = [2, -2]
 
@@ -85,6 +88,7 @@ def desenhar_inicio_jogo():
     tela.fill(cores["preto"])
     pygame.draw.rect(tela, cores["azul"], jogador)
     pygame.draw.rect(tela, cores["branco"], bola)
+
 def desenhar_blocos(blocos):
     for bloco in blocos:
         pygame.draw.rect(tela, cores["amarelo"], bloco)
@@ -94,7 +98,7 @@ def desenhar_blocos(blocos):
 blocos = criar_blocos(quantidade_blocos_linha, quantidade_linhas)
 
 
-#cria um loop infinito
+#loop principal do jogo, aonde de fato tudo acontece
 while not fim_jogo:
     desenhar_inicio_jogo()
     desenhar_blocos(blocos)
